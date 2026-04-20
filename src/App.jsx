@@ -15,6 +15,8 @@ function App() {
   const [tasks, setTasks] = useState(initialTasks);
   const [newStatus, setNewStatus] = useState ("");
   const [newTitle, setNewTitle] = useState("");
+  const [searchTerm, setSearchTerm] = useState ("");
+  const [filterStatus, setFilterStatus] = useState ("");
 
 
 
@@ -40,6 +42,13 @@ function App() {
     const newTasks = tasks.filter((item)=>(item.id!==id))
     setTasks(newTasks);
   };
+
+  const filteredTasks = tasks.filter((task) => {
+    const matchedTitle = task.title.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchedStatus = filterStatus === "all" || task.status===filterStatus
+
+    if(matchedTitle&&matchedStatus) return task;
+  })
 
   return (
     <>
@@ -74,7 +83,30 @@ function App() {
         ))}
       </div>
       
-      
+      <div>
+        <h1>3. Filter & Search</h1>
+        <label>Filtered Task: </label>
+        <input 
+          type="text" 
+          value = {searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}></input>
+
+        <label> Filter Status: </label>
+            <select value={filterStatus} onChange={(e) => setFilterStatus(e.target.value)}>
+              <option value="all">all</option>
+              <option value="todo">todo</option>
+              <option value="in-progress">in-progress</option>
+              <option value="done">done</option>
+            </select>
+        {filteredTasks.map((task)=>(
+        
+          <div key={task.id}>
+            <strong>{task.title}</strong> - <span>{task.status}</span>
+            <button onClick={() => handleDelete(task.id)}>Delete</button>
+          </div>
+        ))}  
+
+      </div>
 
       
     </>
