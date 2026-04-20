@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
+// import reactLogo from './assets/react.svg'
+// import viteLogo from './assets/vite.svg'
+// import heroImg from './assets/hero.png'
 import './App.css'
 
 const initialTasks = [
@@ -16,7 +16,7 @@ function App() {
   const [newStatus, setNewStatus] = useState ("");
   const [newTitle, setNewTitle] = useState("");
   const [searchTerm, setSearchTerm] = useState ("");
-  const [filterStatus, setFilterStatus] = useState ("");
+  const [filterStatus, setFilterStatus] = useState ("all");
 
 
 
